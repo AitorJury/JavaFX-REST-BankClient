@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="crud_project.ui.controller.MenuBarController"
+      stylesheets="@../res/estilo.css"
+      alignment="CENTER_LEFT">
+
+    <children>
+        <MenuBar HBox.hgrow="ALWAYS" maxWidth="1.7976931348623157E308">
+            <menus>
+                <!--TODO: Implementar estas acciones en todos los controladores de vistas
+                que incluyan este menú, es decir, cada uno en el suyo: Customer,Account o Movement-->
+                <Menu fx:id="menuAction" mnemonicParsing="false" text="Actions">
+                    <items>
+                        <MenuItem text="Create" onAction="#handleCreate"/>
+                        <MenuItem text="Refresh" onAction="#handleRefresh"/>
+                        <MenuItem text="Update" onAction="#handleUpdate"/>
+                        <MenuItem text="Delete" onAction="#handleDelete"/>
+                    </items>
+                </Menu> 
+                
+                <Menu mnemonicParsing="false" text="Session">
+                    <items>
+                        <MenuItem fx:id="fxMenuClose" mnemonicParsing="false" text="Close" />
+                        <MenuItem fx:id="fxMenuSignOut" mnemonicParsing="false" text="Sign out" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem fx:id="fxMenuAbout" mnemonicParsing="false" text="About" />
+                        <MenuItem fx:id="fxMenuContent" mnemonicParsing="false" text="Help" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </children>
+</HBox>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Help - My Accounts Management</title>
+        <style>
+            /* Sincronizado con estilo.css */
+            body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #1A1A1A; padding: 30px; background-color: #FFFFFF; }
+            .container { max-width: 950px; margin: auto; border: 1px solid #BFBFBF; padding: 40px; border-radius: 5px; }
+
+            h1 { color: #333333; font-size: 36px; border-bottom: 3px solid #3C8C59; padding-bottom: 10px; text-align: center; }
+            h2 { color: #3C8C59; margin-top: 30px; font-size: 24px; display: flex; align-items: center; }
+
+            .screenshot { text-align: center; margin: 20px 0; background-color: #F8F8F8; border: 1px solid #A8A8A8; padding: 15px; border-radius: 5px; }
+            .screenshot img { max-width: 100%; border: 1px solid #BFBFBF; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+            .caption { display: block; margin-top: 10px; font-size: 14px; color: #4B2A78; font-weight: bold; }
+
+            .btn-ref { padding: 2px 8px; border-radius: 3px; font-weight: bold; font-size: 12px; color: white; text-transform: uppercase; }
+            .primary { background-color: #3C8C59; }
+            .secondary { background-color: #BFBFBF; color: #1A1A1A; }
+            .delete { background-color: #A32B2B; }
+            .purple { background-color: #6C3FA3; }
+
+            .note { background-color: #E2F0D9; border-left: 5px solid #3C8A23; padding: 15px; margin: 20px 0; }
+            .important { color: #A32B2B; font-weight: bold; }
+
+            table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+            th { background-color: #3C8A23; color: white; padding: 10px; text-align: left; }
+            td { border: 1px solid #BFBFBF; padding: 10px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Accounts Management Guide</h1>
+            <p>This terminal allows you to oversee and manage your bank accounts. Below is a detailed explanation of the interface and its operations.</p>
+
+            <h2>1. The Accounts Table</h2>
+            <p>The central element of the window is the <strong>TableView</strong>. Here you can monitor all your financial products at a glance.</p>
+
+            <div class="screenshot">
+                <img src="accounts_table.png" alt="Accounts Table View">
+                <span class="caption">Overview of the main dashboard and data grid.</span>
+            </div>
+
+            <ul>
+                <li><strong>Balance:</strong> Your current funds. If it turns <span class="important">RED</span>, the account is overdrawn.</li>
+                <li><strong>Opening Date:</strong> The exact moment the account was registered in our system.</li>
+            </ul>
+
+            <h2>2. Creating a New Account</h2>
+            <p>To register a new product, use the <span class="btn-ref primary">Create Account</span> button. The system enters "Creation Mode":</p>
+
+            <div class="screenshot">
+                <img src="creation_mode.png" alt="Creation Mode Active">
+                <span class="caption">Creation mode: In-line editing enabled for the new record.</span>
+            </div>
+
+            <ol>
+                <li>A new, empty row appears at the top of the table.</li>
+                <li><strong>In-line Editing:</strong> Double-click the <em>Description</em> and <em>Begin Balance</em> cells to type.</li>
+                <li><strong>Type Selection:</strong> Choose between Standard or Credit using the dropdown.</li>
+                <li>Finalize by clicking <span class="btn-ref primary">Confirm</span> or <span class="btn-ref secondary">Cancel</span> to discard.</li>
+            </ol>
+
+            <h2>3. Financial Operations & Navigation</h2>
+            <p>Use the action buttons at the bottom to interact with the selected account:</p>
+
+            <div class="screenshot">
+                <img src="action_buttons.png" alt="Action Buttons Toolbar">
+                <span class="caption">Toolbar for data synchronization, navigation, and session management.</span>
+            </div>
+
+            <table>
+                <tr>
+                    <th>Action</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><span class="btn-ref primary">Refresh</span></td>
+                    <td>Synchronizes the table with the server to show the latest updates.</td>
+                </tr>
+                <tr>
+                    <td><span class="btn-ref primary">View Movements</span></td>
+                    <td>Navigates to the transaction history of the selected account.</td>
+                </tr>
+                <tr>
+                    <td><span class="btn-ref delete">Log Out</span></td>
+                    <td>Ends your current session and returns to the Sign In screen.</td>
+                </tr>
+            </table>
+
+            <h2>4. Deleting and Context Menu</h2>
+            <p>To remove an account, select it and press <span class="btn-ref delete">Delete Account</span>. You can also right-click a row to open the <strong>Context Menu</strong>.</p>
+
+            <div class="screenshot">
+                <img src="context_menu.png" alt="Right-click Context Menu">
+                <span class="caption">Fast-access context menu for row-specific operations.</span>
+            </div>
+
+            <div class="note">
+                <strong>Business Rules:</strong>
+                <ul>
+                    <li><span class="important">Immutable Fields:</span> Once created, you cannot change the <em>Begin Balance</em> or <em>Account Type</em>.</li>
+                    <li><span class="important">Data Integrity:</span> Accounts with existing movements cannot be deleted.</li>
+                </ul>
+            </div>
+
+            <h2>5. Navigation and Help</h2>
+            <p>The top bar provides global access to session management and this guide:</p>
+
+            <div class="screenshot">
+                <img src="top_menu.png" alt="Top Menu Navigation">
+                <span class="caption">Global menu for session control and help documentation.</span>
+            </div>
+
+            <ul>
+                <li><strong>Session Menu:</strong> Provides a secondary way to Sign Out or Close the application.</li>
+                <li><strong>Help Menu:</strong> Access this guide (<span class="btn-ref purple">Content</span>) or technical info (<span class="btn-ref purple">About</span>).</li>
+            </ul>
+        </div>
+    </body>
+</html>

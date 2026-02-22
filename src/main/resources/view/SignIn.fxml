@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Ventana Principal -->
+<Pane prefHeight="768.0" 
+      prefWidth="1024.0"
+      xmlns="http://javafx.com/javafx/8" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="crud_project.ui.controller.SignInController"
+      styleClass="root-pane" 
+      stylesheets="@../res/estilo.css">
+    
+    <children>
+        <!-- Imagen del logo -->
+        <ImageView fitHeight="134.0" 
+                   fitWidth="170.0" 
+                   layoutX="304.0" 
+                   layoutY="78.0" 
+                   preserveRatio="true">
+            <image>
+                <Image url="@../res/icono_Cynthor_SF.png"/>
+            </image>
+        </ImageView>
+        
+        <!-- Titulo -->
+        <Label layoutX="431.0" 
+               layoutY="134.0" 
+               text="Sign In" 
+               styleClass="title-label">
+        </Label>
+
+        <!-- Email -->
+        <Label layoutX="255.0" 
+               layoutY="244.0" 
+               text="Email:"/>
+        <TextField fx:id="txtEmail" 
+                   layoutX="346.0" 
+                   layoutY="240.0" 
+                   prefHeight="30.0" 
+                   prefWidth="352.0" 
+                   promptText="user@example.com" 
+                   styleClass="text-field"/>
+        <Label layoutX="710.0" 
+               layoutY="244.0" 
+               text="❓">
+            <tooltip>
+                <Tooltip text="Enter your email address to log in"/>
+            </tooltip>
+        </Label>
+
+        <!-- Password -->
+        <Label layoutX="255.0" 
+               layoutY="294.0" 
+               text="Password:"/>
+        <PasswordField fx:id="txtPassword" 
+                       layoutX="346.0" 
+                       layoutY="290.0" 
+                       prefHeight="30.0" 
+                       prefWidth="352.0" 
+                       promptText="Enter your password" 
+                       styleClass="text-field"/>
+        <Label layoutX="710.0" 
+               layoutY="298.0" 
+               text="❓">
+            <tooltip>
+                <Tooltip text="Enter your email password to log in"/>
+            </tooltip>
+        </Label>
+        
+        <!-- Mensaje de error -->
+        <Label fx:id="lblError" 
+               layoutX="346.0" 
+               layoutY="325.0" 
+               text="" 
+               styleClass="error-label"/>
+
+        <!-- Boton Exit -->
+        <Button fx:id="btnExit" 
+                layoutX="355.0" 
+                layoutY="349.0" 
+                mnemonicParsing="false" 
+                prefHeight="35.0" 
+                prefWidth="84.0" 
+                styleClass="button-secondary"
+                text="Exit"/>
+        <!-- Boton Sign In -->
+        <Button fx:id="btnSignIn" 
+                layoutX="469.0" 
+                layoutY="349.0" 
+                mnemonicParsing="false" 
+                prefHeight="35.0" 
+                prefWidth="220.0" 
+                styleClass="button-primary"
+                text="Enter"/>
+
+        <!-- Link -->
+        <Label layoutX="405.0" 
+               layoutY="410.0" 
+               text="Don't have an account?"/>
+        <Hyperlink fx:id="linkSignUp" 
+                   layoutX="575.0" 
+                   layoutY="406.0" 
+                   styleClass="link"
+                   text="Sign Up"/>
+    </children>
+</Pane>

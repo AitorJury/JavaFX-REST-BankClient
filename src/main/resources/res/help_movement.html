@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Help page</title>
+        <style>
+            header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border-bottom: 2px solid #e0e0e0;
+                padding-bottom: 20px;
+                margin-bottom: 30px;
+            }
+
+            .wrapper {
+                margin-bottom: 15px;
+            }
+
+            .img_wrapper{
+                display: flex;
+                justify-content: center;
+                margin: 25px 0
+
+            }
+            .img_wrapper img {
+                max-width: 50%;
+                height: auto;
+                border-radius: 8px; /* Bordes redondeados */
+                border: 1px solid #dcdde1; /* Un borde sutil  */
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+            }
+            p{
+                padding: 0 10px;
+            }
+
+
+            .logo {
+                max-height: 120px;
+                width: auto;
+            }
+
+            body {
+                font: 20px system-ui, Arial;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            h1 {
+                margin: 5px 0;
+                color: #2c3e50;
+                font-size: 28px;
+            }
+
+            h3 {
+                margin: 0;
+                color: #7f8c8d;
+                font-weight: normal;
+            }
+
+        </style>
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="wrapper">
+                    <img src="logo_Cynthor_SF.png" alt="User manager window" class="logo">
+                </div>
+                <h1>HELP PAGE</h1>
+                <h2>Movements Guide – Bank System</h2>
+            </header>
+            <section>
+                <h4>Window description</h4>
+                <p>This window allows you to make payments and deposits from your previously selected bank account. The user can use the controls available in this window.</p>
+            </section>
+            <section>
+                <h4>Controls</h4>
+                <p>When you access the transactions window, you'll see a list of transactions. In the upper left corner, you'll see your account ID, and below, you'll see a series of buttons:
+                </p>
+                <div class="img_wrapper">
+                    <img src="help_movement.png" alt="Movement manage window">
+                </div>
+                <p>
+                    This is the transaction type selector, followed by the text field for entering the amount and the "Create" button, which remains disabled until the amount is entered. It's important to note that the "Create" button will not work if the amount is negative or contains non-numeric characters.
+                </p>
+                <div class="img_wrapper">
+                    <img src="foto_typeAmountAndCreateButton.png" alt="Button create">
+                </div>
+                <div class="img_wrapper">
+                    <img src="foto_create.png" alt="Button create">
+                </div>
+                <p>
+                    The "Delete" button will only remove the last transaction from the account and will be deactivated after use. If you create a new transaction, it will be reactivated.
+                </p>
+                <div class="img_wrapper">
+                    <img src="foto_buttonDelete.png" alt="Button delete">
+                </div>
+                <p>
+                    The "back to accounts" button will take you to the previous page where you can view your accounts.
+                </p>
+                <div class="img_wrapper">
+                    <img src="foto_buttonBackToAccounts.png" alt="Back to accounts button">
+                </div>
+
+            </section>
+            <footer>
+
+            </footer>
+        </main>
+    </body>
+</html>
+

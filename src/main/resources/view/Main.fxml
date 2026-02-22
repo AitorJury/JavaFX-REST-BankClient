@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<!-- Ventana Principal -->
+<Pane prefHeight="768.0" 
+      prefWidth="1024.0"
+      xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="crud_project.ui.controller.MainController"
+      styleClass="root-pane" 
+      stylesheets="@../res/estilo.css">
+
+    <children>
+        <!-- Imagen del logo -->
+        <ImageView fitHeight="279.0" 
+                   fitWidth="329.0"
+                   layoutX="347.5" 
+                   layoutY="80.0"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../res/logo_Cynthor_SF.png" />
+            </image>
+        </ImageView>
+
+        <!-- Texto de inicio -->
+        <Label fx:id="lblWelcome"
+               layoutX="230.0" 
+               layoutY="380.0"
+               prefHeight="50.0" 
+               prefWidth="564.0"
+               styleClass="welcome-label"
+               text="You have successfully logged in!"
+               wrapText="true"/>
+
+        <!-- Boton Log Out -->
+        <Button fx:id="btnLogout"
+                layoutX="372.0" 
+                layoutY="560.0"
+                mnemonicParsing="false"
+                prefHeight="40.0" 
+                prefWidth="280.0"
+                styleClass="button-primary"
+                text="Log Out"/>
+
+        <!-- Boton Exit -->
+        <Button fx:id="btnExit"
+                layoutX="372.0" 
+                layoutY="620.0"
+                mnemonicParsing="false"
+                prefHeight="40.0" 
+                prefWidth="280.0"
+                styleClass="button-secondary"
+                text="Exit"/>
+    </children>
+</Pane>

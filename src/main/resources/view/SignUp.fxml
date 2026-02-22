@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Ventana Principal -->
+
+<Pane prefHeight="768.0" prefWidth="1024.0" styleClass="root-pane" stylesheets="@../res/estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crud_project.ui.controller.SignUpController">
+    
+    <children>
+        <!-- Imagen del logo -->
+        <ImageView fitHeight="134.0" fitWidth="170.0" layoutX="294.0" layoutY="52.0" preserveRatio="true">
+            <image>
+                <Image url="@../res/icono_Cynthor_SF.png" />
+            </image>
+        </ImageView>
+
+        <!-- Titulo -->
+        <Label layoutX="431.0" layoutY="110.0" styleClass="title-label" text="Sign Up" />
+
+        <!-- First Name -->
+        <Label layoutX="207.0" layoutY="203.0" text="First Name:" />
+        <TextField fx:id="txtFirstName" layoutX="346.0" layoutY="196.0" prefHeight="30.0" prefWidth="352.0" promptText="Enter your First Name" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="200.0" text="❓">
+            <tooltip>
+                <Tooltip text="Write your name exactly as it appears on your ID." />
+            </tooltip>
+        </Label>
+        <Label fx:id="errFirstName" layoutX="740.0" layoutY="196.0" styleClass="error-label" />
+
+        <!-- Last Name -->
+        <Label layoutX="207.0" layoutY="247.0" text="Last Name:" />
+        <TextField fx:id="txtLastName" layoutX="346.0" layoutY="240.0" prefHeight="30.0" prefWidth="352.0" promptText="Enter your Last Name" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="244.0" text="❓">
+            <tooltip>
+                <Tooltip text="Enter your last name(s)" />
+            </tooltip>
+        </Label>
+        <Label fx:id="errLastName" layoutX="740.0" layoutY="240.0" styleClass="error-label" />
+
+        <!-- Middle Initial -->
+        <Label layoutX="207.0" layoutY="291.0" text="Middle Initial:" />
+        <TextField fx:id="txtMiddleInitial" layoutX="346.0" layoutY="284.0" prefHeight="30.0" prefWidth="352.0" promptText="Enter your Middle Initial" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="288.0" text="❓">
+            <tooltip>
+                <Tooltip text="Enter your middle initial" />
+            </tooltip>
+        </Label>
+        <Label fx:id="errMiddleInitial" layoutX="740.0" layoutY="284.0" styleClass="error-label" />
+
+        <!-- Phone -->
+        <Label layoutX="207.0" layoutY="335.0" text="Phone:" />
+        <TextField fx:id="txtPhone" layoutX="346.0" layoutY="328.0" prefHeight="30.0" prefWidth="352.0" promptText="Enter your phone number" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="335.0" text="❓">
+            <tooltip>
+                <Tooltip text="Enter your mobile phone number" />
+            </tooltip>
+        </Label>
+        <Label fx:id="errPhone" layoutX="740.0" layoutY="328.0" styleClass="error-label" />
+
+        <!-- City & State -->
+        <Label layoutX="207.0" layoutY="377.0" text="City / State:" />
+        <TextField fx:id="txtCity" layoutX="346.0" layoutY="370.0" prefHeight="30.0" prefWidth="170.0" promptText="City" styleClass="text-field" />
+        <TextField fx:id="txtState" layoutX="530.0" layoutY="370.0" prefHeight="30.0" prefWidth="168.0" promptText="State" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="377.0" text="❓">
+            <tooltip>
+                <Tooltip text="Indicate the city and province where you reside" />
+            </tooltip>
+        </Label>
+        <Label fx:id="errCity" layoutX="740.0" layoutY="370.0" styleClass="error-label" />
+        <Label fx:id="errState" layoutX="740.0" layoutY="386.0" styleClass="error-label" />
+
+        <!-- Street & Zip -->
+        <Label layoutX="207.0" layoutY="417.0" text="Street / ZIP:" />
+        <TextField fx:id="txtStreet" layoutX="346.0" layoutY="410.0" prefHeight="30.0" prefWidth="225.0" promptText="Street" styleClass="text-field" />
+        <TextField fx:id="txtZip" layoutX="584.0" layoutY="410.0" prefHeight="30.0" prefWidth="114.0" promptText="ZIP" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="417.0" text="❓">
+            <tooltip>
+                <Tooltip text="Enter your full address and postal code" />
+            </tooltip>
+        </Label>
+        <Label fx:id="errStreet" layoutX="740.0" layoutY="402.0" styleClass="error-label" />
+        <Label fx:id="errZip" layoutX="740.0" layoutY="418.0" styleClass="error-label" />
+
+        <!-- Email -->
+        <Label layoutX="207.0" layoutY="458.0" text="Email:" />
+        <TextField fx:id="txtEmail" layoutX="346.0" layoutY="451.0" prefHeight="30.0" prefWidth="352.0" promptText="user@example.com" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="455.0" text="❓">
+            <tooltip>
+                <Tooltip text="Please use a valid email address. It will be used to verify your account." />
+            </tooltip>
+        </Label>
+        <Label fx:id="errEmail" layoutX="740.0" layoutY="451.0" styleClass="error-label" />
+
+        <!-- Password -->
+        <Label layoutX="207.0" layoutY="500.0" text="Password:" />
+        <PasswordField fx:id="txtPassword" layoutX="346.0" layoutY="493.0" prefHeight="30.0" prefWidth="352.0" promptText="Enter your password" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="497.0" text="❓">
+            <tooltip>
+                <Tooltip text="The password must be at least 8 characters long and not contain any special characters." />
+            </tooltip>
+        </Label>
+        <Label fx:id="errPassword" layoutX="740.0" layoutY="493.0" styleClass="error-label" />
+
+        <!-- Repeat Password -->
+        <Label layoutX="207.0" layoutY="544.0" text="Repeat Password:" />
+        <PasswordField fx:id="txtRepeatPassword" layoutX="346.0" layoutY="537.0" prefHeight="30.0" prefWidth="352.0" promptText="Repeat your password" styleClass="text-field" />
+        <Label layoutX="710.0" layoutY="541.0" text="❓">
+            <tooltip>
+                <Tooltip text="Repeat exactly the same password as before" />
+            </tooltip>
+        </Label>
+        <Label fx:id="errRepeatPassword" layoutX="740.0" layoutY="537.0" styleClass="error-label" />
+
+        <!-- Botones -->
+        <Button fx:id="btnCreateAccount" layoutX="346.0" layoutY="581.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="168.0" styleClass="button-primary" text="Create Account" />
+        <Button fx:id="btnExit" layoutX="528.0" layoutY="581.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="170.0" styleClass="button-secondary" text="Exit" />
+
+    </children>
+</Pane>

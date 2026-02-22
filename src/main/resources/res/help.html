@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Help page</title>
+        <style>
+            header {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                border-bottom: 2px solid #e0e0e0;
+                padding-bottom: 20px;
+                margin-bottom: 30px;
+            }
+
+            .wrapper {
+                margin-bottom: 15px;
+            }
+
+            .img_wrapper{
+                display: flex;
+                justify-content: center;
+                margin: 25px 0
+
+            }
+            .img_wrapper img {
+                max-width: 50%;
+                height: auto;
+                border-radius: 8px; /* Bordes redondeados */
+                border: 1px solid #dcdde1; /* Un borde sutil  */
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra elegante */
+            }
+            p{
+                padding: 0 10px;
+            }
+
+
+            .logo {
+                max-height: 120px;
+                width: auto;
+            }
+
+            body {
+                font: 20px system-ui, Arial;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+            }
+
+            h1 {
+                margin: 5px 0;
+                color: #2c3e50;
+                font-size: 28px;
+            }
+
+            h3 {
+                margin: 0;
+                color: #7f8c8d;
+                font-weight: normal;
+            }
+
+        </style>
+    </head>
+    <body>
+        <main>
+            <header>
+                <div class="wrapper">
+                    <img src="logo_Cynthor_SF.png" alt="User manager window" class="logo">
+                </div>
+                <h1>HELP PAGE</h1>
+                <h2>User Guide – Bank System</h2>
+            </header>
+            <section>
+                <h4>Basic Description</h4>
+                <p>This window allows you to carry out maintenance operations on
+                    basic user data. The user will be able to use the controls
+                    available in the creation, modify and delete users window.
+                    The application. Likewise, you can generate a report that contains a list
+                    of users with their corresponding data.</p>
+            </section>
+            <section>
+                <h4>Controls</h4>
+                <p>When you enter the user administration window,
+                    you have several options to perform with existing users:
+                    create, edit, and delete. Upon entering, you will see a green button to add a user.
+                </p>
+                <div class="img_wrapper">
+                    <img src="help_window.png" alt="User manager window">
+                </div>
+                <p>
+                    An empty user will be created with a random password and email address.
+                    It is recommended to assign the data before exiting the application to avoid saving an empty user.
+                </p>
+                <div class="img_wrapper">
+                    <img src="add_user_empty.png" alt="empty user row created">
+                </div>
+                <p>
+                    The user can be edited by clicking on the user row.
+                    The user data will be displayed in the fields.
+                </p>
+                <div class="img_wrapper">
+                    <img src="edit_help.png" alt="edit user window">
+                </div>
+                <p>
+                    The user can be deleted by clicking the red button.
+                    It's labeled "Delete Client."
+                    A dialog box will open asking: "Are you sure you want to delete this user?"
+                    You can then confirm or cancel the deletion.
+                </p>
+                <div class="img_wrapper">
+                    <img src="delete_user_succes.png" alt="delete user window">
+                </div>
+                <p>
+                    If you try to delete a user with an associated account,
+                    you will get an error message because deleting a user with an associated account is not allowed.
+                </p>
+                <div class="img_wrapper">
+                    <img src="delete_user_wrong.png" alt="delete user window">
+                </div>
+                <p>
+                    If you don't have any rows selected, the delete button will be disabled.
+                </p>
+                <div class="img_wrapper">
+                    <img src="delete_button_disable.png" alt="delete user window">
+                </div>
+
+            </section>
+            <footer>
+
+            </footer>
+        </main>
+    </body>
+</html>

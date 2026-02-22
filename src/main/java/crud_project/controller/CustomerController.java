@@ -6,6 +6,7 @@
 package crud_project.ui.controller;
 
 
+import java.net.URL;
 import java.util.*;
 
 import java.util.logging.Logger;
@@ -24,6 +25,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -45,14 +47,15 @@ import javax.ws.rs.core.GenericType;
 /**
  *
  * @author juancaizaduenas
- * @todo @fixme Hacer que la siguiente clase implemente las interfaces 
- * Initializable y MenuActionsHandler para que al pulsar en las acciones CRUD del 
- * menú Actions se ejecuten los métodos manejadores correspondientes a la vista 
+ * @todo @fixme Hacer que la siguiente clase implemente las interfaces
+ * Initializable y MenuActionsHandler para que al pulsar en las acciones CRUD del
+ * menú Actions se ejecuten los métodos manejadores correspondientes a la vista
  * que incluye el menú.
- * El método initialize debe llamar a setMenuActionsHandler() para establecer que este
- * controlador es el manejador de acciones del menú. 
+ * El metodo initialize debe llamar a setMenuActionsHandler() para establecer que este
+ * controlador es el manejador de acciones del menú.
  */
-public class CustomerController {
+public class CustomerController implements MenuActionsHandler, Initializable {
+
 
     private static final Logger LOGGER = Logger.getLogger("crudbankclientside.ui");
     private final Stage userStage = new Stage();
@@ -284,6 +287,61 @@ public class CustomerController {
         });
 
         setupTableContextMenu();
+
+
+    }
+
+    @Override
+    public void onCreate() {
+        handleAddCustomerRow(null);
+    }
+
+    @Override
+    public void onRefresh() {
+        customersData.clear();
+        customersData = FXCollections.observableArrayList(client.findAll_XML(new GenericType<List<Customer>>() {
+        }));
+        fxTableView.setItems(customersData);
+        fxTableView.refresh();
+
+    }
+
+    @Override
+    public void onUpdate() {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                "You can edit table by double click in the cell ",
+                ButtonType.YES);
+        alert.setTitle("INFORMATION");
+        alert.setHeaderText("Update button not allowed");
+        alert.showAndWait();
+
+    }
+
+    @Override
+    public void onDelete() {
+
+        Customer selectedCustomer = fxTableView.getSelectionModel().getSelectedItem();
+        if (selectedCustomer != null) {
+            handleDeleteCustomerAndRow(null);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION,
+                    "You must select a row to delete",
+                    ButtonType.OK);
+            alert.setTitle("INFORMATION");
+            alert.setHeaderText("Delete button not allowed");
+            alert.showAndWait();
+        }
+
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+        if (topMenuController != null) {
+            topMenuController.setMenuActionsHandler(this);
+        }
 
 
     }

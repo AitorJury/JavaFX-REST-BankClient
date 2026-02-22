@@ -39,3 +39,4 @@ Este proyecto consiste en el desarrollo de una aplicación de escritorio (Front-
 ## 👤 Autor
 **Aitor Jury Rodríguez** - *Fullstack Developer & Intern @ BBVA Technology*
 - [LinkedIn](https://www.linkedin.com/in/aitor-jury-rodr%C3%ADguez-6330742b1/)
+- [Email](mailto:aitor.jr04@gmail.com)

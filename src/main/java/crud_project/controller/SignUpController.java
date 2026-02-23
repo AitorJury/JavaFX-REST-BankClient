@@ -1,4 +1,4 @@
-package crud_project.ui.controller;
+package crud_project.controller;
 
 // Imports.
 import crud_project.model.Customer;
@@ -92,7 +92,7 @@ public class SignUpController {
 
     // Logger para consola.
     private static final Logger LOGGER
-            = Logger.getLogger("crudbankclientsideapplication.ui");
+            = Logger.getLogger("crud_project.controller");
 
     // Lista de todos los TextFields y PasswordFields.
     private List<javafx.scene.control.TextInputControl> txtFields;
@@ -697,7 +697,7 @@ public class SignUpController {
                     .showAndWait();
 
             // Conectar con Sign In para iniciar sesión.
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/ui/view/SignIn.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/resources/view/SignIn.fxml"));
             Parent root = loader.load();
 
             SignInController controller = loader.getController();

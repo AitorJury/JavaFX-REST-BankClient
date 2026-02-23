@@ -1,4 +1,4 @@
-package crud_project.ui.controller;
+package crud_project.controller;
 
 // Imports.
 import crud_project.logic.AccountRESTClient;
@@ -31,7 +31,7 @@ import javax.ws.rs.core.GenericType;
  * Controlador para la gestión de cuentas bancarias. Maneja la visualización,
  * creación, edición y borrado de cuentas en una TableView.
  *
- * * @author Aitor Jury Rodríguez. 1º DAM.
+ * * @author Aitor Jury Rodríguez.
  * @todo (SOLUCIONADO ) @fixme Hacer que la siguiente clase implemente las
  * interfaces Initializable y MenuActionsHandler para que al pulsar en las
  * acciones CRUD del menú Actions se ejecuten los métodos manejadores
@@ -42,7 +42,7 @@ import javax.ws.rs.core.GenericType;
 public class AccountsController implements Initializable, MenuActionsHandler {
 
     // Logger para el seguimiento de eventos y errores en consola.
-    private static final Logger LOGGER = Logger.getLogger("crud_project.ui");
+    private static final Logger LOGGER = Logger.getLogger("crud_project.controller");
 
     // Componentes de la interfaz definidos en el FXML.
     @FXML
@@ -101,7 +101,7 @@ public class AccountsController implements Initializable, MenuActionsHandler {
                 menuBarController.fxMenuSignOut.setOnAction(this::handleLogOut);
 
                 menuBarController.fxMenuContent.setOnAction(e -> {
-                    showCustomHelp("/crud_project/ui/res/helpAccount.html");
+                    showCustomHelp("/crud_project/resources/res/helpAccount.html");
                 });
             }
 
@@ -520,7 +520,7 @@ public class AccountsController implements Initializable, MenuActionsHandler {
             Alert a = new Alert(Alert.AlertType.CONFIRMATION, "Log out?", yes, no);
             if (a.showAndWait().get() == yes) {
                 restClient.close();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/ui/view/SignIn.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/resources/view/SignIn.fxml"));
                 Parent root = loader.load();
                 SignInController sic = loader.getController();
                 Stage signInStage = new Stage();
@@ -572,7 +572,7 @@ public class AccountsController implements Initializable, MenuActionsHandler {
                 return;
             }
             // Carga del controlador de movimientos.
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/ui/view/Movement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/resources/view/Movement.fxml"));
             Parent root = loader.load();
 
             MovementController mc = loader.getController();
@@ -626,7 +626,7 @@ public class AccountsController implements Initializable, MenuActionsHandler {
         itemDelete.setOnAction(this::handleDeleteAccount);
         itemView.setOnAction(this::handleViewMovements);
         itemHelp.setOnAction(e -> {
-            showCustomHelp("/crud_project/ui/res/helpAccount.html");
+            showCustomHelp("/crud_project/resources/res/helpAccount.html");
         });
 
         contextMenu.getItems().addAll(itemDelete, itemView, new SeparatorMenuItem(), itemHelp);

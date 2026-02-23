@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package crud_project.ui.controller;
+package crud_project.controller;
 
 import crud_project.logic.AccountRESTClient;
 import crud_project.logic.MovementRESTClient;
@@ -57,7 +57,7 @@ import javax.ws.rs.core.GenericType;
  */
 public class MovementController implements MenuActionsHandler {
 
-    private static final Logger LOGGER = Logger.getLogger("crudbankclientside.ui");
+    private static final Logger LOGGER = Logger.getLogger("crud_project.controller");
 
     private Stage stage;
     private Scene scene;
@@ -136,7 +136,7 @@ public class MovementController implements MenuActionsHandler {
             hBoxMenuController.setMenuActionsHandler(this);
             hBoxMenuController.init(this.stage);
             hBoxMenuController.fxMenuContent.setOnAction(e -> {
-                showCustomerHelp("/crud_project/ui/res/help_movement.html");
+                showCustomerHelp("/crud_project/resources/res/help_movement.html");
             });
         }
 
@@ -262,7 +262,7 @@ public class MovementController implements MenuActionsHandler {
                 // Si confirma, cerrar la aplicación.
                 if (resp == yes) {
                     try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/ui/view/Accounts.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/resources/view/Accounts.fxml"));
                         Parent root = loader.load();
                         //Cargamos controlador
                         AccountsController controller = loader.getController();

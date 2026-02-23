@@ -1,4 +1,4 @@
-package crud_project.ui.controller;
+package crud_project;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

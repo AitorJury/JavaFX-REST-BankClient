@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <HBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="crud_project.ui.controller.MenuBarController"
+      fx:controller="crud_project.controller.MenuBarController"
       stylesheets="@../res/estilo.css"
       alignment="CENTER_LEFT">
 

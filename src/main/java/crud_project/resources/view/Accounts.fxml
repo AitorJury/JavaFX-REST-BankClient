@@ -8,7 +8,7 @@
 
 <!-- Ventana Principal -->
 
-<AnchorPane prefHeight="768.0" prefWidth="1024.0" styleClass="root-pane" stylesheets="@../res/estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crud_project.ui.controller.AccountsController">
+<AnchorPane prefHeight="768.0" prefWidth="1024.0" styleClass="root-pane" stylesheets="@../res/estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crud_project.controller.AccountsController">
     <children>
         <!-- Menu Bar -->
         <fx:include fx:id="menuBar" source="TopMenu.fxml"

@@ -9,17 +9,14 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
-import crud_project.ui.controller.SignInController;
+import crud_project.controller.SignInController;
 
-/**
- *
- * @author juan
- */
+
 public class AppCRUD extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader =new FXMLLoader(getClass().getResource("ui/view/SignIn.fxml"));
+        FXMLLoader loader =new FXMLLoader(getClass().getResource("/crud_project/resources/view/SignIn.fxml"));
         Parent root = loader.load();
 
         SignInController controller = loader.getController();

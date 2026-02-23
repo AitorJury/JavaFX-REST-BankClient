@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package crud_project.ui.controller;
+package crud_project.controller;
 
 /**
  * @todo Interface que deben implementar todos los controladores de vistas que incorporen

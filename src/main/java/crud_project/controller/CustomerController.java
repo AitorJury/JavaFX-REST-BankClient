@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package crud_project.ui.controller;
+package crud_project.controller;
 
 
 import java.net.URL;
@@ -46,7 +46,7 @@ import javax.ws.rs.core.GenericType;
 
 /**
  *
- * @author juancaizaduenas
+ * @author Juan.
  * @todo @fixme Hacer que la siguiente clase implemente las interfaces
  * Initializable y MenuActionsHandler para que al pulsar en las acciones CRUD del
  * menú Actions se ejecuten los métodos manejadores correspondientes a la vista
@@ -57,7 +57,7 @@ import javax.ws.rs.core.GenericType;
 public class CustomerController implements MenuActionsHandler, Initializable {
 
 
-    private static final Logger LOGGER = Logger.getLogger("crudbankclientside.ui");
+    private static final Logger LOGGER = Logger.getLogger("crud_project.controller");
     private final Stage userStage = new Stage();
 
     public static final String EXIT_CONFIRMATION_TITLE = "Exit Confirmation";
@@ -283,7 +283,7 @@ public class CustomerController implements MenuActionsHandler, Initializable {
          */
         topMenuController.init(userStage);
         topMenuController.fxMenuContent.setOnAction(event -> {
-            showHelpWindow("/crud_project/ui/res/help.html");
+            showHelpWindow("/crud_project/resources/res/help.html");
         });
 
         setupTableContextMenu();

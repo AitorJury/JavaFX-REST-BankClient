@@ -11,7 +11,7 @@
       prefWidth="1024.0"
       xmlns="http://javafx.com/javafx/8" 
       xmlns:fx="http://javafx.com/fxml/1" 
-      fx:controller="crud_project.ui.controller.SignInController"
+      fx:controller="crud_project.controller.SignInController"
       styleClass="root-pane" 
       stylesheets="@../res/estilo.css">
     

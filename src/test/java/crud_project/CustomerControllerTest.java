@@ -1,4 +1,4 @@
-package crud_project.ui.controller;
+package crud_project;
 
 import crud_project.AppCRUD;
 import crud_project.logic.AccountRESTClient;

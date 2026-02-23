@@ -1,4 +1,4 @@
-package crud_project.ui.controller;
+package crud_project.controller;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 
 import java.util.logging.Logger;
 
-import static crud_project.ui.controller.CustomerController.EXIT_CONFIRMATION_MESSAGE;
-import static crud_project.ui.controller.CustomerController.EXIT_CONFIRMATION_TITLE;
+import static crud_project.controller.CustomerController.EXIT_CONFIRMATION_MESSAGE;
+import static crud_project.controller.CustomerController.EXIT_CONFIRMATION_TITLE;
 
 /**
  * La clase {@code MenuBarController} gestiona el comportamiento de la barra de
@@ -25,6 +25,7 @@ import static crud_project.ui.controller.CustomerController.EXIT_CONFIRMATION_TI
  * Se encarga de manejar las acciones del usuario asociadas a los distintos
  * elementos del menú, como cerrar la aplicación, mostrar la ventana "Acerca
  * de", cerrar sesión y mostrar la página de ayuda.
+ * @author Aitor Jury Rodríguez.
  */
 public class MenuBarController {
 
@@ -71,7 +72,7 @@ public class MenuBarController {
         }
     }
     
-    private static final Logger LOGGER = Logger.getLogger("crudbankclientside.ui");
+    private static final Logger LOGGER = Logger.getLogger("crud_project.controller");
     private Stage userStage;
 
     /**
@@ -159,7 +160,7 @@ public class MenuBarController {
         WebEngine webEngine = webView.getEngine();
 
         try {
-            String url = getClass().getResource("/crud_project/ui/res/help.html").toExternalForm();
+            String url = getClass().getResource("/crud_project/resources/res/help.html").toExternalForm();
             webEngine.load(url);
 
             //Crear ventana para mostrar la help al igual que el about

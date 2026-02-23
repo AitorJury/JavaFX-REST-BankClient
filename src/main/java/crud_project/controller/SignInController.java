@@ -1,4 +1,4 @@
-package crud_project.ui.controller;
+package crud_project.controller;
 
 // Imports.
 import crud_project.logic.CustomerRESTClient;
@@ -43,7 +43,7 @@ public class SignInController {
     private Button btnSignIn;
     @FXML
     private Hyperlink linkSignUp;
-    private static final Logger LOGGER = Logger.getLogger("crudbankclientside.ui");
+    private static final Logger LOGGER = Logger.getLogger("crud_project.controller");
     private Stage stage;
     private final ButtonType ok = new ButtonType("OK");
     private final ButtonType yes = new ButtonType("Yes");
@@ -115,7 +115,7 @@ public class SignInController {
         try {
             // Cerrar la ventana actual.
             // Abrir la ventana de registro de nuevo usuario.
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/ui/view/SignUp.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/resources/view/SignUp.fxml"));
             Parent root = loader.load();
 
             SignUpController controller = loader.getController();
@@ -176,7 +176,7 @@ public class SignInController {
             // En el caso de ser administrador, se envía a otra ventana distinta.
             if (email.equals("admin") && password.equals("admin")) {
                 LOGGER.info("Admin login detected. Changing to User Controller Window");
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/ui/view/CustomerController.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/resources/view/CustomerController.fxml"));
                 Parent root = loader.load();
 
                 CustomerController controller = loader.getController();
@@ -201,7 +201,7 @@ public class SignInController {
                         Customer.class, email, password);
 
                 // Si t0do es correcto se abrirá la página “Main” y se cerrará la actual.
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/ui/view/Accounts.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/crud_project/resources/view/Accounts.fxml"));
                 Parent root = loader.load();
                 // Cargamos controlador.
                 AccountsController controller = loader.getController();

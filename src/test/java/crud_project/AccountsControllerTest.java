@@ -1,4 +1,4 @@
-package crud_project.ui.controller;
+package crud_project;
 
 import crud_project.AppCRUD;
 import crud_project.model.Account;
@@ -22,6 +22,7 @@ import static org.junit.Assert.*;
 
 /**
  * Clase de pruebas de integración para el controlador de cuentas.
+ * @author Aitor Jury Rodríguez.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AccountsControllerTest extends ApplicationTest {

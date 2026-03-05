@@ -23,21 +23,32 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.converter.DoubleStringConverter;
+
 import javax.ws.rs.ProcessingException;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericType;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  * Controlador para la gestión de cuentas bancarias. Maneja la visualización,
  * creación, edición y borrado de cuentas en una TableView.
  *
  * * @author Aitor Jury Rodríguez.
+ * 
  * @todo (SOLUCIONADO ) @fixme Hacer que la siguiente clase implemente las
- * interfaces Initializable y MenuActionsHandler para que al pulsar en las
- * acciones CRUD del menú Actions se ejecuten los métodos manejadores
- * correspondientes a la vista que incluye el menú. El métod o initialize debe
- * llamar a setMenuActionsHandler() para establecer que este controlador es el
- * manejador de acciones del menú.
+ *       interfaces Initializable y MenuActionsHandler para que al pulsar en las
+ *       acciones CRUD del menú Actions se ejecuten los métodos manejadores
+ *       correspondientes a la vista que incluye el menú. El métod o initialize
+ *       debe
+ *       llamar a setMenuActionsHandler() para establecer que este controlador
+ *       es el
+ *       manejador de acciones del menú.
  */
 public class AccountsController implements Initializable, MenuActionsHandler {
 
@@ -58,7 +69,7 @@ public class AccountsController implements Initializable, MenuActionsHandler {
     @FXML
     private TableColumn<Account, Date> colTimestamp;
     @FXML
-    private Button btnRefresh, btnLogOut, btnViewMovements, btnDeleteAccount, btnCancelAccount;
+    private Button btnRefresh, btnLogOut, btnViewMovements, btnDeleteAccount, btnCancelAccount, btnPrint;
     @FXML
     private ToggleButton btnAddAccount;
     @FXML
@@ -123,6 +134,8 @@ public class AccountsController implements Initializable, MenuActionsHandler {
             btnLogOut.setOnAction(this::handleLogOut);
             btnViewMovements.setOnAction(this::handleViewMovements);
             btnDeleteAccount.setOnAction(this::handleDeleteAccount);
+
+            btnPrint.setOnAction(this::handlePrintAction);
 
             this.stage.show();
         } catch (WebApplicationException e) {
@@ -435,9 +448,8 @@ public class AccountsController implements Initializable, MenuActionsHandler {
         try {
             List<Account> accounts = restClient.findAccountsByCustomerId_XML(
                     new GenericType<List<Account>>() {
-            },
-                    loggedCustomer.getId().toString()
-            );
+                    },
+                    loggedCustomer.getId().toString());
             accountsData.setAll(accounts);
             tableAccounts.refresh();
         } catch (ProcessingException e) {
@@ -697,5 +709,41 @@ public class AccountsController implements Initializable, MenuActionsHandler {
     @Override
     public void onDelete() {
         handleDeleteAccount(null);
+    }
+
+    public void handlePrintAction(ActionEvent event) {
+        try {
+            LOGGER.info("Generating accounts report...");
+
+            // Cargar el informe desde el classpath.
+            JasperReport accountReport = JasperCompileManager.compileReport(
+                    getClass().getResourceAsStream("/crud_project/resources/view/AccountReport.jrxml"));
+
+            // Datos de la tabla.
+            JRBeanCollectionDataSource dataItems = new JRBeanCollectionDataSource(
+                    (Collection<Account>) this.tableAccounts.getItems());
+
+            // Parámetros: Pasamos el nombre del cliente logueado.
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("customerName",
+                    (loggedCustomer != null) ? loggedCustomer.getFirstName() : "Unknown Customer");
+            parameters.put("customerLastName",
+                    (loggedCustomer != null) ? loggedCustomer.getLastName() : "Unknown Customer");
+
+            // Llenar el report.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(accountReport, parameters, dataItems);
+
+            // Mostrar el visor.
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setTitle("Accounts Management - " + parameters.get("customerName"));
+            jasperViewer.setVisible(true);
+
+        } catch (JRException e) {
+            showError("JasperReports Error: " + e.getMessage());
+            LOGGER.severe("Resource missing: " + e.getMessage());
+        } catch (Exception e) {
+            showError("Unexpected Error: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 }

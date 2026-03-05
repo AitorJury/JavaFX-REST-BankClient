@@ -1,6 +1,5 @@
 package crud_project;
 
-import crud_project.AppCRUD;
 import crud_project.logic.AccountRESTClient;
 import crud_project.model.Account;
 import crud_project.model.Customer;
@@ -14,10 +13,6 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
-
-import static org.junit.Assert.*;
-import static org.testfx.api.FxAssert.verifyThat;
-
 import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit.ApplicationTest;
 
@@ -27,6 +22,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static org.junit.Assert.*;
+import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.*;
 import static org.testfx.matcher.control.ButtonMatchers.isDefaultButton;
 
@@ -38,14 +35,12 @@ import static org.testfx.matcher.control.ButtonMatchers.isDefaultButton;
 public class CustomerControllerTest extends ApplicationTest {
     private TableView<Customer> table;
     private Button btnDelete;
-    private Button btnAdd;
-    private Button btnExit;
+    private boolean isTopMenu = false;
 
 
     @Override
     public void start(Stage stage) throws Exception {
         //Method to start the application
-        //new AppCRUD().start(stage);
         new AppCRUD().start(stage);
 
     }
@@ -63,9 +58,6 @@ public class CustomerControllerTest extends ApplicationTest {
         //var needed to test
         table = lookup("#fxTableView").queryTableView();
         btnDelete = lookup("#fxBtnDelete").queryButton();
-        btnAdd = lookup("#fxBtnNewCustomer").queryButton();
-        btnExit = lookup("#fxBtnExit").queryButton();
-
 
     }
 
@@ -73,6 +65,7 @@ public class CustomerControllerTest extends ApplicationTest {
     public void close_window() throws Exception {
         FxToolkit.hideStage();
         FxToolkit.cleanupStages();
+        isTopMenu = false;
     }
 
     @Test
@@ -108,23 +101,29 @@ public class CustomerControllerTest extends ApplicationTest {
             }
         }
 
-        // Verificar que encontramos a Paco
+
         assertNotEquals("No se encontró el usuario creado para borrar", -1, rowIndex);
 
         verifyThat(btnDelete, isDisabled());
         int rowsCount = table.getItems().size();
 
-        // Seleccionamos la fila de Paco
+
         Node row = lookup(".table-row-cell").nth(rowIndex).query();
         clickOn(row);
 
-        verifyThat(btnDelete, isEnabled());
-        clickOn(btnDelete);
+        if (isTopMenu) {
+            verifyThat(btnDelete, isEnabled());
+            clickOn("Actions");
+            clickOn("Delete");
+        } else {
+            verifyThat(btnDelete, isEnabled());
+            clickOn(btnDelete);
+        }
 
-        // Ahora el alert debería ser el correcto
+
         verifyThat("Deleting user: " + userToDeleteName, isVisible());
 
-        clickOn("Sí"); // O clickOn("Yes") dependiendo de tu idioma
+        clickOn("Sí");
         assertEquals("The row has not been deleted", rowsCount - 1, table.getItems().size());
 
     }
@@ -162,7 +161,12 @@ public class CustomerControllerTest extends ApplicationTest {
         };
         int cellIndex = 1;
         int rowsCount = table.getItems().size();
-        clickOn(isDefaultButton());
+        if (isTopMenu) {
+            clickOn("Actions");
+            clickOn("Create");
+        } else {
+            clickOn(isDefaultButton());
+        }
         for (String dato : datos) {
             Node cell = lookup(".table-cell").nth(cellIndex).query();
             assertNotNull(cell);
@@ -288,4 +292,36 @@ public class CustomerControllerTest extends ApplicationTest {
         verifyThat("#fxBtnDelete", isDisabled());
 
     }
+
+    @Test
+    public void test_delete_customer_top_menu() {
+
+        isTopMenu = true;
+        test_D_delete_customer_success();
+    }
+
+    @Test
+    public void test_refresh_table() {
+        int initialRows = table.getItems().size();
+
+        interact(() -> {
+            // Borramos la primera fila que NO sea admin para asegurar que siempre haya algo que borrar
+            for (Customer c : table.getItems()) {
+                if (!c.getFirstName().equalsIgnoreCase("admin")) {
+                    table.getItems().remove(c);
+                    break;
+                }
+            }
+        });
+
+        //Verificar que se borra una fila localmente
+        assertEquals(initialRows - 1, table.getItems().size());
+
+        clickOn("Actions");
+        clickOn("Refresh");
+
+        assertEquals(initialRows, table.getItems().size());
+
+    }
+
 }

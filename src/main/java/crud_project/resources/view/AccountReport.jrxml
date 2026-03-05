@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="AccountReport" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20"
+              rightMargin="20" topMargin="20" bottomMargin="20" uuid="49d0e35d-c335-45fc-9036-f8ada84489bd">
+    <parameter name="customerName" class="java.lang.String" />
+    <parameter name="customerLastName" class="java.lang.String" />
+
+    <field name="id" class="java.lang.Long" />
+    <field name="description" class="java.lang.String" />
+    <field name="type" class="java.lang.Object" />
+    <field name="balance" class="java.lang.Double" />
+    <field name="beginBalanceTimestamp" class="java.util.Date" />
+    <field name="creditLine" class="java.lang.Double" />
+    <field name="beginBalance" class="java.lang.Double" />
+
+    <variable name="totalBalance" class="java.lang.Double" calculation="Sum">
+        <variableExpression><![CDATA[$F{balance}]]></variableExpression>
+    </variable>
+
+    <title>
+        <band height="80">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="65" backcolor="#F0F0F0"
+                               uuid="4bb8e9de-10e0-49ed-be5c-f46e445b81e3" />
+
+                <graphicElement>
+                    <pen lineWidth="0.0" />
+                </graphicElement>
+            </rectangle>
+
+            <staticText>
+                <reportElement x="75" y="10" width="280" height="30" forecolor="#333333"
+                               uuid="9cb393ff-3aa0-4293-9db8-3cc3bc8c3701" />
+
+                <textElement verticalAlignment="Middle">
+                    <font size="20" isBold="true" />
+                </textElement>
+
+                <text><![CDATA[CYNTHOR BANK]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="75" y="40" width="280" height="20" forecolor="#666666"
+                               uuid="c1074221-b107-4048-b8b7-8b70c11eb03e" />
+
+                <textElement>
+                    <font isItalic="true" />
+                </textElement>
+
+                <textFieldExpression><![CDATA["Account Summary for: " + $P{customerName} + " " + $P{customerLastName}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="dd/MM/yyyy">
+                <reportElement x="435" y="40" width="100" height="20"
+                               uuid="ef34ae51-e27a-40fa-8f66-136fab5ef22a" />
+
+                <textElement textAlignment="Right" />
+
+                <textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+            </textField>
+
+            <image>
+                <reportElement x="0" y="0" width="63" height="65"
+                               uuid="d8064e7d-505d-406e-aca3-79df6d9ea6b4" />
+
+                <imageExpression><![CDATA[this.getClass().getResourceAsStream("/crud_project/resources/res/icono_Cynthor_SF.png")]]></imageExpression>
+            </image>
+        </band>
+    </title>
+
+    <pageHeader>
+        <band height="25">
+            <staticText>
+                <reportElement x="0" y="0" width="250" height="15" forecolor="#999999" />
+                <textElement>
+                    <font size="10" isBold="true" />
+                </textElement>
+                <text><![CDATA[CYNTHOR BANK - Official Report]]></text>
+            </staticText>
+
+            <textField>
+                <reportElement x="305" y="0" width="250" height="15" forecolor="#999999" />
+                <textElement textAlignment="Right">
+                    <font size="10" isItalic="true" />
+                </textElement>
+                <textFieldExpression><![CDATA["Client: " + $P{customerName} + " " + $P{customerLastName}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageHeader>
+
+    <columnHeader>
+        <band height="35">
+            <rectangle>
+                <reportElement x="0" y="0" width="555" height="25" backcolor="#3C8A23" uuid="11112222-3333-4444-5555-666677778888"/>
+                <graphicElement>
+                    <pen lineWidth="0.0"/>
+                </graphicElement>
+            </rectangle>
+			
+            <line>
+                <reportElement x="0" y="30" width="555" height="1" forecolor="#A8A8A8"
+                               uuid="d243adc1-e666-4ada-bbda-980db7b4b89b" />
+            </line>
+
+            <staticText>
+                <reportElement x="5" y="5" width="65" height="20" forecolor="#FFFFFF"
+                               uuid="cfceca0a-2fce-451f-806c-716673a9b10e" />
+                <textElement>
+                    <font isBold="true" size="9" />
+                </textElement>
+                <text><![CDATA[ID]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="75" y="5" width="125" height="20" forecolor="#FFFFFF"
+                               uuid="b32d2016-44e3-4671-bc53-347264e2f44a" />
+                <textElement>
+                    <font isBold="true" size="9" />
+                </textElement>
+                <text><![CDATA[DESCRIPTION]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="205" y="5" width="65" height="20" forecolor="#FFFFFF"
+                               uuid="00016623-2174-4e7d-92e1-f4ff3249537d" />
+                <textElement>
+                    <font isBold="true" size="9" />
+                </textElement>
+                <text><![CDATA[TYPE]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="275" y="5" width="60" height="20" forecolor="#FFFFFF"
+                               uuid="35500a0e-dcf8-4a47-a80a-7ce0d89be803" />
+                <textElement>
+                    <font isBold="true" size="9" />
+                </textElement>
+                <text><![CDATA[OPENED]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="340" y="5" width="65" height="20" forecolor="#FFFFFF"
+                               uuid="a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d" />
+                <textElement textAlignment="Right">
+                    <font isBold="true" size="9" />
+                </textElement>
+                <text><![CDATA[CREDIT L.]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="410" y="5" width="65" height="20" forecolor="#FFFFFF"
+                               uuid="f9e8d7c6-b5a4-3c2d-1e0f-9a8b7c6d5e4f" />
+                <textElement textAlignment="Right">
+                    <font isBold="true" size="9" />
+                </textElement>
+                <text><![CDATA[INIT. BAL.]]></text>
+            </staticText>
+
+            <staticText>
+                <reportElement x="480" y="5" width="70" height="20" forecolor="#FFFFFF"
+                               uuid="4646ec8c-0c1c-430b-ac31-4f610ff7724e" />
+                <textElement textAlignment="Right">
+                    <font isBold="true" size="9" />
+                </textElement>
+                <text><![CDATA[BALANCE]]></text>
+            </staticText>
+        </band>
+    </columnHeader>
+
+    <detail>
+        <band height="25">
+            <textField>
+                <reportElement x="0" y="3" width="70" height="20"
+                               uuid="d5073da3-d6e3-430a-9869-ad470d4115c7" />
+                <textElement>
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="75" y="3" width="125" height="20"
+                               uuid="e758ef40-d0bb-4ff5-9119-486502e70c8a" />
+                <textElement>
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="205" y="3" width="65" height="20"
+                               uuid="eac607b5-84f6-4aa2-b8e2-d3dd94746265" />
+                <textElement>
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[""+$F{type}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="dd/MM/yy">
+                <reportElement x="275" y="3" width="60" height="20"
+                               uuid="2baf9853-59a8-47e1-84c7-09bebf23a3a1" />
+                <textElement>
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{beginBalanceTimestamp}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="#,##0.00€">
+                <reportElement x="340" y="3" width="65" height="20"
+                               uuid="b2c3d4e5-f6a7-8b9c-0d1e-2f3a4b5c6d7e" />
+                <textElement textAlignment="Right">
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{creditLine}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="#,##0.00€">
+                <reportElement x="410" y="3" width="65" height="20"
+                               uuid="c3d4e5f6-a7b8-9c0d-1e2f-3a4b5c6d7e8f" />
+                <textElement textAlignment="Right">
+                    <font size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{beginBalance}]]></textFieldExpression>
+            </textField>
+
+            <textField pattern="#,##0.00€">
+                <reportElement x="480" y="3" width="75" height="20" forecolor="#3C8A23"
+                               uuid="b022ab6f-267a-4ab6-9a64-d01c6cb82803" />
+                <textElement textAlignment="Right">
+                    <font isBold="true" size="9" />
+                </textElement>
+                <textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <pageFooter>
+        <band height="40">
+            <textField>
+                <reportElement x="435" y="20" width="80" height="20"
+                               uuid="56130e04-eec2-43d8-8349-a4a92e399652" />
+
+                <textElement textAlignment="Right" />
+
+                <textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+            </textField>
+
+            <textField evaluationTime="Report">
+                <reportElement x="515" y="20" width="40" height="20"
+                               uuid="954c091f-2ece-4903-8963-c249e04019e9" />
+
+                <textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+    <summary>
+        <band height="60">
+            <line>
+                <reportElement x="300" y="10" width="255" height="1" forecolor="#A8A8A8"
+                                               uuid="d243adc1-e666-4ada-bbda-980db7b4b89b" />
+            </line>
+
+            <staticText>
+                <reportElement x="300" y="20" width="150" height="20" forecolor="#1A1A1A"
+                                               uuid="cfceca0a-2fce-451f-806c-716673a9b10e" />
+                <textElement>
+                    <font isBold="true" />
+                </textElement>
+                <text><![CDATA[Total Balance:]]></text>
+            </staticText>
+
+            <textField pattern="#,##0.00€">
+                <reportElement x="450" y="20" width="105" height="20" forecolor="#3C8A23"
+                                               uuid="b022ab6f-267a-4ab6-9a64-d01c6cb82803" />
+                <textElement textAlignment="Right">
+                    <font isBold="true" size="12" />
+                </textElement>
+                <textFieldExpression><![CDATA[$V{totalBalance}]]></textFieldExpression>
+            </textField>
+
+            <textField>
+                <reportElement x="0" y="20" width="200" height="20" forecolor="#4B2A78" />
+                <textFieldExpression><![CDATA["Number of accounts: " + $V{REPORT_COUNT}]]></textFieldExpression>
+            </textField>
+        </band>
+    </summary>
+
+</jasperReport>

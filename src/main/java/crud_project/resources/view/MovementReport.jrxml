@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MovementReport" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5ede580-789e-483d-aa7f-7fc97f683ba1">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="timestamp" class="java.util.Date"/>
+	<field name="description" class="java.lang.String"/>
+	<field name="amount" class="java.lang.Double"/>
+	<field name="balance" class="java.lang.Double"/>
+	<variable name="TOTAL_MOVIMIENTOS" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{description}]]></variableExpression>
+	</variable>
+	<variable name="SUMA_TOTAL_IMPORTES" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{amount}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="79" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="-12" width="555" height="91" backcolor="#F0F0F0" uuid="0cb78603-b9f2-4000-966b-8bf9872fad8a"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="15" y="0" width="250" height="30" uuid="4e5abc49-b555-45c5-9a8e-2adcdc236b0f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CYNTHOR BANK]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="40" width="300" height="30" uuid="328f26f6-842c-4009-8245-7c2caec9b02d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MOVEMENT REPORT]]></text>
+			</staticText>
+			<image>
+				<reportElement x="470" y="-5" width="75" height="75" uuid="1567656e-c4c3-48b1-a5e3-a892edbdf111"/>
+				<imageExpression><![CDATA[this.getClass().getResourceAsStream("/crud_project/resources/res/icono_Cynthor_SF.png")]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="350" y="10" width="200" height="20" uuid="75e81f74-21a3-4eae-8a2c-f095e57a293b"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="120" height="20" uuid="ccb4c78a-da1e-4fa5-8bcb-501b631b6497"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[MOVEMENT REPORT]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="130" height="20" uuid="3c57bfdd-630f-44d9-aa2a-4aea0c3acea5"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[DATE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="0" width="130" height="20" uuid="425fa71e-a67f-4289-8c48-996d0c27bc19"/>
+				<textElement>
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[TYPE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="0" width="120" height="20" uuid="34dffb49-c56b-4b27-8766-22206c041df8"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[AMOUNT]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="410" y="0" width="120" height="20" uuid="219e03ad-721d-4e91-9e21-e6b83c4f8775"/>
+				<textElement textAlignment="Right">
+					<font isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[BALANCE]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="0" y="0" width="130" height="20" uuid="30fd4ab3-64ee-4442-8ee6-ea06053af4d4"/>
+				<textFieldExpression><![CDATA[$F{timestamp}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="130" height="20" uuid="004ba695-3586-48ac-b96f-995ff80539ba"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €">
+				<reportElement x="280" y="0" width="120" height="20" uuid="1befe05c-85f7-4475-8ac3-ddf4012902e6"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{amount}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 €">
+				<reportElement x="410" y="1" width="120" height="20" uuid="d4af3256-21c4-49d2-a8f5-f641076490f1"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="435" y="34" width="80" height="20" uuid="87654321-abcd-1234-abcd-123456789012"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="12345678-abcd-1234-abcd-123456789012"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="70" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="5" width="555" height="1" uuid="62d60e6c-7e62-432d-93e5-9c988975a507"/>
+			</line>
+			<staticText>
+				<reportElement x="0" y="15" width="130" height="20" uuid="d7560416-6467-4e3e-953b-e3c3f0c3a504"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL MOVEMENTS:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="15" width="40" height="20" uuid="3d2a7647-7e61-460d-83f5-7c2caec9b02d"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{TOTAL_MOVIMIENTOS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="150" y="15" width="250" height="20" uuid="a328f26f-842c-4009-8245-7c2caec9b02d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total money used in transfers:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 €">
+				<reportElement x="410" y="15" width="120" height="20" uuid="b28f26f6-842c-4009-8245-7c2caec9b02d"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SUMA_TOTAL_IMPORTES}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="280" y="40" width="120" height="20" uuid="f98e7d6c-5432-1234-abcd-9876543210ab"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[FINAL BALANCE:]]></text>
+			</staticText>
+			<textField pattern="#,##0.00 €">
+				<reportElement x="410" y="40" width="120" height="20" uuid="e8d7c6b5-4321-5678-bcde-1234567890ef"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

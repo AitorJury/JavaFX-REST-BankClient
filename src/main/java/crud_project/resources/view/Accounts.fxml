@@ -11,10 +11,7 @@
 <AnchorPane prefHeight="768.0" prefWidth="1024.0" styleClass="root-pane" stylesheets="@../res/estilo.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="crud_project.controller.AccountsController">
     <children>
         <!-- Menu Bar -->
-        <fx:include fx:id="menuBar" source="TopMenu.fxml"
-                    AnchorPane.leftAnchor="0.0" 
-                    AnchorPane.rightAnchor="0.0" 
-                    AnchorPane.topAnchor="0.0"/>
+        <fx:include fx:id="menuBar" source="TopMenu.fxml" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
 
         <!-- Logo -->
         <ImageView fitHeight="80.0" fitWidth="100.0" layoutX="50.0" layoutY="30.0" preserveRatio="true" styleClass="image-view">
@@ -51,6 +48,8 @@
         <Button fx:id="btnDeleteAccount" layoutX="582.0" layoutY="650.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="button-delete" text="Delete Account" />
         <!-- Botón para ir atrás -->
         <Button fx:id="btnLogOut" layoutX="824.0" layoutY="650.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="button-delete" text="Log Out" />
+        <!-- Botón de imprimir informe -->
+        <Button fx:id="btnPrint" layoutX="824.0" layoutY="705.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" styleClass="button-secondary" text="Print" />
         <!-- Mensaje de error -->
         <Label fx:id="lblMessage" layoutX="246.0" layoutY="718.0" prefHeight="15.0" prefWidth="532.0" styleClass="error-label" text="" />
     </children>

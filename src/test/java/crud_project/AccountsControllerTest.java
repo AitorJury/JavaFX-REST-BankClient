@@ -19,9 +19,11 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.base.NodeMatchers.*;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 
 /**
  * Clase de pruebas de integración para el controlador de cuentas.
+ *
  * @author Aitor Jury Rodríguez.
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -30,6 +32,7 @@ public class AccountsControllerTest extends ApplicationTest {
     private TableView table;
     private static Long idAcc;
     private static String uniqueName;
+    private boolean isMenuTest = false;
 
     /**
      * Punto de entrada de la aplicación para TestFX.
@@ -99,7 +102,12 @@ public class AccountsControllerTest extends ApplicationTest {
      */
     @Test
     public void test_B_refresh_system() {
-        clickOn("#btnRefresh");
+        if (isMenuTest) {
+            clickOn("Actions");
+            clickOn("Refresh");
+        } else {
+            clickOn("#btnRefresh");
+        }
         verifyThat("#lblMessage", hasText("Data refreshed from server."));
     }
 
@@ -189,17 +197,18 @@ public class AccountsControllerTest extends ApplicationTest {
      */
     @Test
     public void test_F_validate_immutable_fields() {
-        int cols = table.getColumns().size();
-
         if (table.getItems().isEmpty()) {
             return;
         }
 
-        Node cellType = lookup(".table-cell").nth(cols + 2).query();
+        Node firstRow = lookup(".table-row-cell").nth(0).query();
+        clickOn(firstRow);
+        
+        Node cellType = lookup(".table-cell").nth(2).query();
         doubleClickOn(cellType);
         verifyThat("#lblMessage", hasText("Account type cannot be modified for existing accounts."));
 
-        Node cellBegin = lookup(".table-cell").nth(cols + 5).query();
+        Node cellBegin = lookup(".table-cell").nth(5).query();
         doubleClickOn(cellBegin);
         verifyThat("#lblMessage", hasText("Initial balance cannot be modified."));
     }
@@ -346,7 +355,12 @@ public class AccountsControllerTest extends ApplicationTest {
     public void test_M_create_account_success() {
         int rowsBefore = table.getItems().size();
         uniqueName = "Test-" + System.currentTimeMillis();
-        clickOn("#btnAddAccount");
+        if (isMenuTest) {
+            clickOn("Actions");
+            clickOn("Create");
+        } else {
+            clickOn("#btnAddAccount");
+        }
 
         Node cell = lookup(".table-cell").nth(1).query();
         doubleClickOn(cell);
@@ -430,7 +444,12 @@ public class AccountsControllerTest extends ApplicationTest {
         if (targetRow != -1) {
             Node rowNode = lookup(".table-row-cell").nth(targetRow).query();
             clickOn(rowNode);
-            clickOn("#btnDeleteAccount");
+            if (isMenuTest) {
+                clickOn("Actions");
+                clickOn("Delete");
+            } else {
+                clickOn("#btnDeleteAccount");
+            }
             clickOn("Yes");
 
             try {
@@ -457,5 +476,66 @@ public class AccountsControllerTest extends ApplicationTest {
         clickOn("#btnLogOut");
         clickOn("Yes");
         verifyThat("#btnSignIn", isVisible());
+    }
+
+    // =========================================================================
+    // 7. TESTS DEL MENÚ SUPERIOR
+    // =========================================================================
+    @Test
+    public void test_Q_menu_refresh() {
+        isMenuTest = true;
+        test_B_refresh_system();
+        isMenuTest = false;
+    }
+
+    @Test
+    public void test_R_menu_create() {
+        isMenuTest = true;
+        test_M_create_account_success();
+        isMenuTest = false;
+    }
+
+    @Test
+    public void test_S_menu_delete() {
+        // Aprovecha la cuenta que creó el Test R
+        isMenuTest = true;
+        test_O_delete_new_account_success();
+        isMenuTest = false;
+    }
+
+    @Ignore
+    @Test
+    public void test_Y_creation_30_accounts() {
+        for (int ind = 0; ind < 30; ind++) {
+            test_M_create_account_success();
+        }
+    }
+
+    @Ignore
+    @Test
+    public void test_Z_delete_all_tests_accounts() {
+        boolean found = true;
+
+        while (found) {
+            found = false;
+            int targetRow = -1;
+
+            for (int i = 0; i < table.getItems().size(); i++) {
+                Account acc = (Account) table.getItems().get(i);
+                if (acc.getDescription() != null && acc.getDescription().startsWith("Test-")) {
+                    targetRow = i;
+                    found = true;
+                    break;
+                }
+            }
+
+            if (found && targetRow != -1) {
+                Node rowNode = lookup(".table-row-cell").nth(targetRow).query();
+                clickOn(rowNode);
+
+                clickOn("#btnDeleteAccount");
+                clickOn("Yes");
+            }
+        }
     }
 }

@@ -16,8 +16,11 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +47,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javax.ws.rs.core.GenericType;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -103,6 +113,9 @@ public class MovementController implements MenuActionsHandler {
     private Label lblBalance;
     @FXML
     private Label lblNmCredit;
+    @FXML
+    private Button btnPrint;
+
     /**
      * Controlador del menú superior JavaFX asigna automáticamente el campo
      * topMenuController cuando usas fx:id="hBoxMenu".
@@ -168,6 +181,9 @@ public class MovementController implements MenuActionsHandler {
             lblCreditLine.setVisible(true);
             lblNmCredit.setVisible(true);
         }
+
+        //Ponemos el nuevo boton un manejador
+        btnPrint.setOnAction(this::handbleBtnPrint);
 
         //Deshabilita el botón de crear movimiento
         createMovement.setDisable(true);
@@ -451,7 +467,28 @@ public class MovementController implements MenuActionsHandler {
         }
     }
 
-    public void handlelblError(String message) {
+        
+    public void handbleBtnPrint(ActionEvent event) {
+        try {
+            JasperReport report = JasperCompileManager.compileReport(getClass()
+                    .getResourceAsStream("/crud_project/resources/view/MovementReport.jrxml"));
+            JRBeanCollectionDataSource dataItems = new JRBeanCollectionDataSource((Collection<Movement>) this.tbMovement.getItems());
+            Map<String, Object> parameters = new HashMap<>();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report, parameters, dataItems);
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setTitle("Report Viewer Cynthor Bank");
+            jasperViewer.setVisible(true);
+            
+
+        } catch (JRException ex) {
+            handlelblError("Error generating report");
+            LOGGER.severe("Error en Jasper: " + ex.getMessage());
+        }
+        
+
+}
+
+public void handlelblError(String message) {
         lblError.setText(message);
     }
 
@@ -508,26 +545,26 @@ public class MovementController implements MenuActionsHandler {
     //Implementados los Override
 
     @Override
-    public void onCreate() {
+        public void onCreate() {
         handleBtnCreate(null);
         LOGGER.info("Movimiento creado");
 
     }
 
     @Override
-    public void onRefresh() {
+        public void onRefresh() {
         loadMovements();
         handlelblError("Tabla refrescada");
         LOGGER.info("Tabla refrescada");
     }
 
     @Override
-    public void onUpdate() {
+        public void onUpdate() {
         handlelblError("No se puede hacer update con los movimientos");
     }
 
     @Override
-    public void onDelete() {
+        public void onDelete() {
         handleBtnDelete(null);
         LOGGER.info("Movimiento borrado");
 

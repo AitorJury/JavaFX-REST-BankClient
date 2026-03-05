@@ -6,22 +6,14 @@
 package crud_project.controller;
 
 
-import java.net.URL;
-import java.util.*;
-
-import java.util.logging.Logger;
-
 import crud_project.logic.AccountRESTClient;
 import crud_project.logic.CustomerRESTClient;
-
 import crud_project.model.Account;
 import crud_project.model.Customer;
-
 import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -29,24 +21,31 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.StackPane;
-import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LongStringConverter;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
-import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.GenericType;
+import java.net.URL;
+import java.util.*;
+import java.util.logging.Logger;
 
 /**
  *
+ * <<<<<<< HEAD:crud_project/ui/controller/CustomerController.java
+ *
+ * @author juancaizaduenas
+ * =======
  * @author Juan.
+ * >>>>>>> dev_account_aitor:src/main/java/crud_project/controller/CustomerController.java
  * @todo @fixme Hacer que la siguiente clase implemente las interfaces
  * Initializable y MenuActionsHandler para que al pulsar en las acciones CRUD del
  * menú Actions se ejecuten los métodos manejadores correspondientes a la vista
@@ -55,8 +54,6 @@ import javax.ws.rs.core.GenericType;
  * controlador es el manejador de acciones del menú.
  */
 public class CustomerController implements MenuActionsHandler, Initializable {
-
-
     private static final Logger LOGGER = Logger.getLogger("crud_project.controller");
     private final Stage userStage = new Stage();
 
@@ -153,6 +150,13 @@ public class CustomerController implements MenuActionsHandler, Initializable {
      */
     @FXML
     public Button fxBtnExit;
+
+    /**
+     * Boton para imprimir reporte
+     */
+    @FXML
+    public Button fxBtnPrint;
+
 
     /**
      * Controlador del menú superior
@@ -278,6 +282,8 @@ public class CustomerController implements MenuActionsHandler, Initializable {
         /* Salir de la aplicacion a traves del boton Exit creado*/
         fxBtnExit.setOnAction(this::handleOnExitAction);
 
+        fxBtnPrint.setOnAction(this::handlePrintReport);
+
         /*
          * Import del componente reutilizable de MenuBarController
          */
@@ -345,6 +351,41 @@ public class CustomerController implements MenuActionsHandler, Initializable {
 
 
     }
+
+    private void handlePrintReport(Event event) {
+
+        try {
+            LOGGER.info("Generating customer report...");
+
+            // Cargar el informe desde el classpath.
+            JasperReport customerReport = JasperCompileManager.compileReport(
+                    getClass().getResourceAsStream("/crud_project/resources/view/CustomerReport.jrxml"));
+
+            // Datos de la tabla.
+            JRBeanCollectionDataSource dataItems = new JRBeanCollectionDataSource(this.fxTableView.getItems());
+
+            // Parámetros: Pasamos el nombre del cliente logueado.
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("customerName",
+                    (this.customer != null) ? customer.getFirstName() : "Unknown Customer");
+
+            // Llenar el report.
+            JasperPrint jasperPrint = JasperFillManager.fillReport(customerReport, parameters, dataItems);
+
+            // Mostrar el visor.
+            JasperViewer jasperViewer = new JasperViewer(jasperPrint, false);
+            jasperViewer.setTitle("Customer Management - " + parameters.get("customerName"));
+            jasperViewer.setVisible(true);
+
+        } catch (JRException e) {
+            handleAlertError("JasperReports Error: " + e.getMessage());
+            LOGGER.severe("Resource missing: " + e.getMessage());
+        } catch (Exception e) {
+            handleAlertError("Unexpected Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Maneja el cambio de selección de filas en la tabla de clientes.
@@ -521,7 +562,7 @@ public class CustomerController implements MenuActionsHandler, Initializable {
 
         //Obetener valor de la celda
         String newValue = cell.getNewValue().trim().toUpperCase();
-        //Obtener 
+        //Obtener
         Customer myCustomer = cell.getRowValue();
         try {
 

@@ -43,5 +43,6 @@
         <Label fx:id="lblBalance" layoutX="843.0" layoutY="563.0" prefHeight="30.0" prefWidth="111.0" />
         <Label fx:id="lblNmCredit" layoutX="835.0" layoutY="474.0" prefHeight="15.0" prefWidth="111.0" styleClass="title-label" text="CreditLine" />
         <Label fx:id="lblCreditLine" layoutX="835.0" layoutY="496.0" prefHeight="18.0" prefWidth="111.0" />
+      <Button fx:id="btnPrint" layoutX="833.0" layoutY="405.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="139.0" styleClass="button-secondary" text="Print" />
     </children>
 </AnchorPane>
